@@ -1,5 +1,7 @@
 package com.gmellocorp.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -16,7 +18,8 @@ public class Category implements Serializable {
     private String name;
 
     //colleção só usa get
-    @Transient
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories")
     private Set<Product> producties = new HashSet<>();
 
     public Category() {

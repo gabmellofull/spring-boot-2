@@ -2,6 +2,7 @@ package com.gmellocorp.course.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gmellocorp.course.entities.enums.OrderStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,12 +24,15 @@ public class Order implements Serializable {
     @JoinColumn(name = "client_id")
     private User client;
 
+    private Integer status;
+
     public Order() {
     }
 
-    public Order(Long id, Instant moment, User client) {
+    public Order(Long id, Instant moment, OrderStatus status, User client) {
         this.id = id;
         this.moment = moment;
+        setStatus(status);
         this.client = client;
     }
 
@@ -46,6 +50,16 @@ public class Order implements Serializable {
 
     public void setMoment(Instant moment) {
         this.moment = moment;
+    }
+
+    public OrderStatus getStatus() {
+        return OrderStatus.valueOf(status);
+    }
+
+    public void setStatus(OrderStatus status) {
+        if (status != null) {
+            this.status = status.getCode();
+        }
     }
 
     public User getClient() {

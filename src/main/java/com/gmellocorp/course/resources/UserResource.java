@@ -19,12 +19,12 @@ public class UserResource {
     private UserService service;
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll(){
+    public ResponseEntity<List<User>> findAll(){ //resposta padrão
         List<User> list = service.findAll();
-        return ResponseEntity.ok().body(list);
+        return ResponseEntity.ok().body(list);// corpo e status ok
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/{id}") //pesquisa por id
     public ResponseEntity<User> findById(@PathVariable Long id){
         User obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
